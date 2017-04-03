@@ -12,6 +12,8 @@
 		A274C6D91E8D5A5500B178B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A274C6D71E8D5A5500B178B6 /* Main.storyboard */; };
 		A274C6DB1E8D5A5500B178B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A274C6DA1E8D5A5500B178B6 /* Assets.xcassets */; };
 		A274C6DE1E8D5A5500B178B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A274C6DC1E8D5A5500B178B6 /* LaunchScreen.storyboard */; };
+		A274C6EA1E8D5B3C00B178B6 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = A274C6E91E8D5B3B00B178B6 /* OpenCVWrapper.mm */; };
+		A274C6F11E8F6B9400B178B6 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A274C6F01E8F6B9400B178B6 /* opencv2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,11 @@
 		A274C6DA1E8D5A5500B178B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A274C6DD1E8D5A5500B178B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A274C6DF1E8D5A5500B178B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A274C6E71E8D5B3B00B178B6 /* iosLaneFinder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iosLaneFinder-Bridging-Header.h"; sourceTree = "<group>"; };
+		A274C6E81E8D5B3B00B178B6 /* OpenCVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
+		A274C6E91E8D5B3B00B178B6 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
+		A274C6ED1E8D5E8700B178B6 /* iosLaneFinder-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "iosLaneFinder-Prefix.pch"; sourceTree = "<group>"; };
+		A274C6F01E8F6B9400B178B6 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A274C6F11E8F6B9400B178B6 /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -54,12 +62,17 @@
 		A274C6D21E8D5A5500B178B6 /* iosLaneFinder */ = {
 			isa = PBXGroup;
 			children = (
+				A274C6F01E8F6B9400B178B6 /* opencv2.framework */,
 				A274C6D31E8D5A5500B178B6 /* AppDelegate.swift */,
 				A274C6D51E8D5A5500B178B6 /* ViewController.swift */,
 				A274C6D71E8D5A5500B178B6 /* Main.storyboard */,
 				A274C6DA1E8D5A5500B178B6 /* Assets.xcassets */,
 				A274C6DC1E8D5A5500B178B6 /* LaunchScreen.storyboard */,
 				A274C6DF1E8D5A5500B178B6 /* Info.plist */,
+				A274C6E81E8D5B3B00B178B6 /* OpenCVWrapper.h */,
+				A274C6E91E8D5B3B00B178B6 /* OpenCVWrapper.mm */,
+				A274C6E71E8D5B3B00B178B6 /* iosLaneFinder-Bridging-Header.h */,
+				A274C6ED1E8D5E8700B178B6 /* iosLaneFinder-Prefix.pch */,
 			);
 			path = iosLaneFinder;
 			sourceTree = "<group>";
@@ -96,6 +109,7 @@
 				TargetAttributes = {
 					A274C6CF1E8D5A5500B178B6 = {
 						CreatedOnToolsVersion = 8.2.1;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -138,6 +152,7 @@
 			files = (
 				A274C6D61E8D5A5500B178B6 /* ViewController.swift in Sources */,
 				A274C6D41E8D5A5500B178B6 /* AppDelegate.swift in Sources */,
+				A274C6EA1E8D5B3C00B178B6 /* OpenCVWrapper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,10 +275,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)/iosLaneFinder",
+				);
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/iosLaneFinder/iosLaneFinder-Prefix.pch";
 				INFOPLIST_FILE = iosLaneFinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jameshulley.iosLaneFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iosLaneFinder/iosLaneFinder-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -272,10 +295,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/**",
+					"$(PROJECT_DIR)/iosLaneFinder",
+				);
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/iosLaneFinder/iosLaneFinder-Prefix.pch";
 				INFOPLIST_FILE = iosLaneFinder/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jameshulley.iosLaneFinder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "iosLaneFinder/iosLaneFinder-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
