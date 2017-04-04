@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "VideoSource.h"
-#import "Eigen/Dense"
 
 #ifdef __cplusplus
 #include <opencv2/opencv.hpp>
