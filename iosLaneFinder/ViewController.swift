@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var previewView: UIView!
-//    let wrapper = Wrapper()
+    let wrapper = OpenCVWrapper()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,8 +20,8 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        wrapper.setTargetView(previewView);
-//        wrapper.start();
+        wrapper.setTargetView(previewView);
+        wrapper.start();
     }
 
     override func didReceiveMemoryWarning() {

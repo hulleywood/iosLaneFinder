@@ -6,11 +6,12 @@
 //  Copyright © 2017 James Hulley. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface OpenCVWrapper : NSObject
 
-//    - (void)isThisWorking;
+- (void)setTargetView:(UIView *)view;
+- (void)start;
 
 @end
 
