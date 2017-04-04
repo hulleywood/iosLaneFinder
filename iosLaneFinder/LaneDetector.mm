@@ -115,11 +115,11 @@ using namespace cv;
 
 - (void)lanePixels:(cv::Mat &)frame {
     
-//    Mat colorPixels = [self colorPixels:frame];
+    Mat colorPixels = [self colorPixels:frame];
     Mat linePixels = [self linePixels:frame];
     
-//    colorPixels.copyTo(frame);
-    linePixels.copyTo(frame);
+    bitwise_and(colorPixels, linePixels, frame);
+    
 }
 
 @end
