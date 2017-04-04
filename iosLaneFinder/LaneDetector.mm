@@ -8,6 +8,8 @@
 
 #import "LaneDetector.h"
 
+using namespace cv;
+
 @implementation LaneDetector
 
 - (instancetype)init
@@ -52,8 +54,66 @@
        [self resetForSide:@"right"];
     }
     
-    cv::cvtColor(frame, frame, cv::COLOR_BGRA2GRAY);
+    [self lanePixels:frame];
     
+}
+
+- (Mat)colorPixels:(cv::Mat &)frame {
+    
+    Mat hsv, gray, yellowMask, yellowMasked, whiteMask, whiteMasked, dst;
+    int thresholdType = 0; // THRESH_BINARY
+    double maxVal = 255; // max pixel val is 255
+    double thresholdVal = 0; // anything greater than 0
+    Scalar lowerYellow = (10, 100, 100);
+    Scalar upperYellow = (40, 255, 255);
+    Scalar lowerWhite = (0, 0, 190);
+    Scalar upperWhite = (180, 255, 255);
+    
+    cvtColor(frame, hsv, COLOR_BGR2HSV);
+    cvtColor(frame, gray, COLOR_BGRA2GRAY);
+    
+    // mask yellow colors
+    inRange(hsv, lowerYellow, upperYellow, yellowMask);
+    gray.copyTo(yellowMasked, yellowMask);
+    
+    // mask white colors
+    inRange(hsv, lowerWhite, upperWhite, whiteMask);
+    gray.copyTo(whiteMasked, whiteMask);
+    
+    // if either mask contains pixel, set to max and return
+    bitwise_or(whiteMasked, yellowMasked, dst);
+    threshold(dst, dst, thresholdVal, maxVal, thresholdType);
+        
+    return dst;
+}
+
+- (Mat)linePixels:(cv::Mat &)frame {
+    
+    Mat hls, sobelX, dst;
+    int dx = 1;
+    int dy = 0;
+    int thresholdType = 0; // THRESH_BINARY
+    double maxVal = 255; // max pixel val is 255
+    double thresholdVal = 0; // anything greater than 0
+    Scalar sxThreshold = (10, 100);
+    
+    cvtColor(frame, hls, COLOR_BGR2HLS);
+    Sobel(hls.col(1), sobelX, CV_64F, dx, dy);
+    abs(sobelX);
+    normalize(sobelX, sobelX, 0, 255, NORM_MINMAX, CV_8UC1);
+    inRange(sobelX, sxThreshold[0], sxThreshold[1], dst);
+    threshold(dst, dst, thresholdVal, maxVal, thresholdType);
+    
+    return dst;
+}
+
+- (void)lanePixels:(cv::Mat &)frame {
+    
+    Mat colorPixels = [self colorPixels:frame];
+    Mat linePixels = [self linePixels:frame];
+    
+//    colorPixels.copyTo(frame);
+//    linePixels.copyTo(frame);
 }
 
 @end

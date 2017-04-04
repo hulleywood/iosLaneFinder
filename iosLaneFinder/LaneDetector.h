@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "VideoSource.h"
+#import "Eigen/Dense"
 
 #ifdef __cplusplus
 #include <opencv2/opencv.hpp>
@@ -36,6 +37,9 @@
 
 - (void)resetForSide:(NSString*)side;
 - (void)processFrame:(cv::Mat &)frame;
+- (void)lanePixels:(cv::Mat &)frame;
+- (cv::Mat)colorPixels:(cv::Mat &)frame;
+- (cv::Mat)linePixels:(cv::Mat &)frame;
 
 @end
 
